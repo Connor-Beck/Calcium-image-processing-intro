@@ -15,7 +15,7 @@ There is significant flexiblity with a growing list of methods across the chemic
 
 
 ## 0.1 How does Calcium imaging work?
-[Grienberger and Konnerth](papers/Grienberger_Konnerth-Calcium) provide a great review on the biological background into neuronal calcium signaling and the practical approaches for imaging. I recommend reading through this work to learn about calcium indicators (both chemical and genetically encoded), dye-loading techniques, and imaging modalities.
+[Grienberger and Konnerth](papers/Grienberger_and_Konnerth-Calcium.pdf) provide a great review on the biological background into neuronal calcium signaling and the practical approaches for imaging. I recommend reading through this work to learn about calcium indicators (both chemical and genetically encoded), dye-loading techniques, and imaging modalities.
 
 Calcium imaging requires:
 1. Host tissue: Typically neurons in live animals or cultured cells.
@@ -24,7 +24,7 @@ Calcium imaging requires:
 4. Signal processing: Analysis pipelines to extract and interpret fluorescence changes from videos.
 
 ## 0.2 Understanding calcium signals in neurons
-[Ali and Kwan](papers/Ali_andKwan-CalciumToBehavior) wrote a useful review explaining the differences of in vivo calcium imaging signals from the neuronal soma, axons, and dendrites, and the physiological relevance of these differences. They also do a great job addressing how to relate calcium signals to behavior, and major pitfalls you can run into on the analysis side.
+[Ali and Kwan](papers/Ali_and_Kwan-CalciumToBehavior.pdf) wrote a useful review explaining the differences of in vivo calcium imaging signals from the neuronal soma, axons, and dendrites, and the physiological relevance of these differences. They also do a great job addressing how to relate calcium signals to behavior, and major pitfalls you can run into on the analysis side.
 
 **Somatic** (neuronal cell body) calcium imaging can provide insights into neuronal activity, as voltage-gated calcium channels enable rapid calcium influx into the soma when the neuron fires.
 
@@ -36,7 +36,7 @@ Side note: What is discussed in this repository is only a small subset of what c
 
 
 ## 1.0 Translating calcium signals to track neural codes
-[Saito et al.](papers/Saito_etal-NeuralCode2P) is an in depth explanation into the neural codes that can be extracted from calcium imaging data. I often come back to this.
+[Saito et al.](papers/Saito_etal-NeuralCode2P.pdf) is an in depth explanation into the neural codes that can be extracted from calcium imaging data. I often come back to this.
 
 
 ## 1.1 - Processing calcium signals
@@ -45,7 +45,7 @@ Instead, let's start with raw fluorescent calcium traces.
 
 This data processing is typically done in either MATLAB or python, the choice is yours. The field is very slowly moving towards python, but MATLAB is still commonly used.
 
-The [Fluorescent Data.csv](data/Fluorescent Data) file contains a number of calcium traces that you can explore.\
+The [Fluorescent Data](data/Fluorescent Data.csv) csv file contains a number of calcium traces that you can explore.\
 The dimensions of the data within the csv are **324 neurons x 15000 frames**.\
 Each value in the data is the raw mean intensity recorded from neurons expressing GCAMP6s recorded at 4.8 frames per second.
 
@@ -76,9 +76,9 @@ Identify the time points when rapid calcium influx occurs. This will be represen
 
 ### Task 1.2 - Analyze network activity
 
-[Yuste's](papers/Yuste-NeurontoNetwork) review discussing the need for circuit investigations instead of individual neurons. A great history lesson and a fun read.
+[Yuste's](papers/Yuste-NeurontoNetwork.pdf) review discussing the need for circuit investigations instead of individual neurons. A great history lesson and a fun read.
 
-[Wenzel and Hamm](papers/Wenzel_and_Hamm-Ensembles) provides a guide to identifying and quantifying neuronal ensembles with calcium imaging, discussing theoretical, experimental, and analytical considerations for studying co-activity patterns in vivo.
+[Wenzel and Hamm](papers/Wenzel_and_Hamm-Ensembles.pdf) provides a guide to identifying and quantifying neuronal ensembles with calcium imaging, discussing theoretical, experimental, and analytical considerations for studying co-activity patterns in vivo.
 
 
 ## Contributing
