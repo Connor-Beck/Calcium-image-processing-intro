@@ -45,7 +45,7 @@ Instead, let's start with raw fluorescent calcium traces.
 
 This data processing is typically done in either MATLAB or python, the choice is yours. The field is very slowly moving towards python, but MATLAB is still commonly used.
 
-The [Fluorescent Data](data/Fluorescent Data.csv) csv file contains a number of calcium traces that you can explore.\
+The [Fluorescent Data](data/Fluorescent%20Data.csv) csv file contains a number of calcium traces that you can explore.\
 The dimensions of the data within the csv are **324 neurons x 15000 frames**.\
 Each value in the data is the raw mean intensity recorded from neurons expressing GCAMP6s recorded at 4.8 frames per second.
 
