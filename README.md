@@ -1,6 +1,6 @@
 # Calcium imaging and image processing introduction
 
-Developed by Connor L. Beck\
+* *Developed by Connor L. Beck* *\
 Updated July 2025
 
 This repository is to support introductions into calcium imaging.
@@ -26,30 +26,51 @@ Calcium imaging requires:
 ## 0.2 Understanding calcium signals in neurons
 [Ali and Kwan](papers/Ali_and_Kwan-CalciumToBehavior.pdf) wrote a useful review explaining the differences of in vivo calcium imaging signals from the neuronal soma, axons, and dendrites, and the physiological relevance of these differences. They also do a great job addressing how to relate calcium signals to behavior, and major pitfalls you can run into on the analysis side.
 
+Here we will primarily focus on somatic calcium imaging:
+
+GCaMP6s expressing, Layer 2/3 pyramidal neurons in the motor cortex as the mouse explores.
+![](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzRoa2F3NGw0aGVmN2V6NmZrb204ZnlpcXF3a29yMmVhN2czYmd1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/N6944MoGCGbldk6POi/giphy.gif)
+
 **Somatic** (neuronal cell body) calcium imaging can provide insights into neuronal activity, as voltage-gated calcium channels enable rapid calcium influx into the soma when the neuron fires.
+
+However, calcium imaging in dendrites is also critical for translating neural function.
 
 **Dendritic** (receiving terminals of neurons) calcium imaging can provide insights into synaptic inputs, as local voltage changes elict local calcium influx that can be quantified relative to the magnitude and number of simultaneous synaptic inputs.
 
-Side note: What is discussed in this repository is only a small subset of what can be done with calcium imaging. There are many other uses of calcium imaging in neurons and other cell types. In my PhD, I used calcium imaging to track [changes in neuronal function under mechanical forces](https://onlinelibrary.wiley.com/doi/full/10.1002/smll.202406678). Calcium can be used to track functional changes in [astrocytes](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01100-7?dgcid=raven_jbs_etoc_email), [osteocytes](https://www.pnas.org/doi/10.1073/pnas.1707863114), or even [plants](https://www.cell.com/trends/plant-science/fulltext/S1360-1385(23)00233-9) (to name a few). It's a brillant technique that has changed the scientific landscape!
+Side note: What is discussed in this repository is only a small subset of what can be done with calcium imaging. There are many other uses of calcium imaging in neurons and other cell types. In my PhD, I used calcium imaging to track [changes in neuronal function under mechanical forces](https://onlinelibrary.wiley.com/doi/full/10.1002/smll.202406678). Calcium can be used to track functional changes in [astrocytes](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01100-7?dgcid=raven_jbs_etoc_email), [osteocytes](https://www.pnas.org/doi/10.1073/pnas.1707863114), or even [plants](https://www.cell.com/trends/plant-science/fulltext/S1360-1385(23)00233-9) . It's a brillant technique that has changed the scientific landscape!
 
-# Module 1 - Exploring calcium signal traces
+## 0.3 Why do we care about calcium and neural dynamics?
+The cerebral cortex is essential for mammalian behavior, where can processes sensory information, control voluntary movements, and execute high-order cognitive function, along with many other functions. These functions are governed by global and local neural circuits that modulate neural function to produce behavioral outputs. 
 
+As systems neuroscientists, our goal is to identify the circuits that establish behaviors. Dissecting these circuits requires (1) tracking of neural activity in the circuit relative to the behavior and (2) modulation of neural activity during the behavior. 
 
-## 1.0 Translating calcium signals to track neural codes
-[Saito et al.](papers/Saito_etal-NeuralCode2P.pdf) is an in depth explanation into the neural codes that can be extracted from calcium imaging data. I often come back to this.
+By tracking activity during behavior, we can identify key circuit features that are representative of behavior. Circuit features can be a number of features like local field potentials (beta, theta delta, etc.), local neurotransmitter concentrations (dopamine, seratonin, orexin, etc.), or individual neuronal firing (excitatory or inhibitory). Across these featues, there is a growing toolbox of recording modalities. Electrodes can be used to record neuronal electrophysiology with techniques like electroencephalogram (EEG), electrocorticography (ECoG), or shank recordings. The critical downside of electrophysiology is its lack of spatial resolution, which limits the recordings of indivdual neuronal activitys within large populations of neurons. To alleviate this, optical methods like calcium imaging or voltage imaging provide clear access to individual neurons. 
 
+With calcium imaging, we can 
 
-## 1.1 - Processing calcium signals
-Learning the entire calcium processing pipeline can be a lot to start with.\
-Instead, let's start with raw fluorescent calcium traces.
+[Yuste's](papers/Yuste-NeurontoNetwork.pdf) review discussing the need for circuit investigations instead of individual neurons. A great history lesson and a fun read.
 
-This data processing is typically done in either MATLAB or python, the choice is yours. The field is very slowly moving towards python, but MATLAB is still commonly used.
+# Module 1 - Exploring somatic calcium dynamics
+Learning the entire calcium processing pipeline can be overwhelming to start with.\
+
+To start, I have provided you with raw calcium traces extracted from a calcium video like the one above.\
 
 The [Fluorescent Data](data/Fluorescent%20Data.csv) csv file contains a number of calcium traces that you can explore.\
 The dimensions of the data within the csv are **324 neurons x 15000 frames**.\
 Each value in the data is the raw mean intensity recorded from neurons expressing GCAMP6s recorded at 4.8 frames per second.
 
-### Task 1.1.1 - Signal cleaning
+**In this section, I would like you to explore calcium signals by designing your own processing scripts**\
+* *Calcium signal processing is typically done in either MATLAB or python. The field is very slowly moving towards python, but MATLAB is still commonly used. For this work, the choice is yours.* *
+
+Below are the classical methods to calcium image processing that you can follow. There is a level of subjectiveness to this data processing that depends on the calcium sensor, optics, and general noise of your recordings. Calcium signals and events always need to be validated in our research, which is why you will often see traces in publications.
+
+If you would like to read about the general methods for calcium signal processing, [Saito et al.](papers/Saito_etal-NeuralCode2P.pdf) provides an in depth explanation into the neural codes that can be extracted from calcium imaging data. I often come back to this.
+
+## Task 1.0 - Importing data
+
+
+
+### Task 1.1 - Signal cleaning
 **Normalize the signal**\
 Compute	$ΔF/F$ as a percentage change from baseline intensity:
 
@@ -65,7 +86,7 @@ Slow (>20s) fluctuations in intensity can happen due to the optical instrumentat
 **Deliverable**\
 Plot a couple of neuronal calcium signals across the steps (before, after normalization, and after background subtraction) to ensure it works correctly.
 
-### Task 1.1.2 - Detect transient calcium events
+### Task 1.2 - Detect transient calcium events
 Identify the time points when rapid calcium influx occurs. This will be represented by a strong and short-term intensity increase in the calcium signal. A single GCaMP6s calcium spike should present a FWHM of < 5s, though repeated spikes can compound transient events, stacking intensities in time, but you will still see individal peaks.
 
 *hint: for detection we often use a neuron specific standard deviation threshold detection (e.g. an event is detected when the calcium signal is above 5 standard deviations from the mean).*
@@ -74,16 +95,15 @@ Identify the time points when rapid calcium influx occurs. This will be represen
 (1) Plot a coule of neuronal calcium signals with highlighted locations of the transient events
 (2) Create a scatter plot with time as the x-axis, neuron ID as the y-axis, with scatter points representing the time points corresponding to detected spikes.
 
-### Task 1.2 - Analyze network activity
+### Task 1.3 - Analyze network activity
 
-[Yuste's](papers/Yuste-NeurontoNetwork.pdf) review discussing the need for circuit investigations instead of individual neurons. A great history lesson and a fun read.
 
 [Wenzel and Hamm](papers/Wenzel_and_Hamm-Ensembles.pdf) provides a guide to identifying and quantifying neuronal ensembles with calcium imaging, discussing theoretical, experimental, and analytical considerations for studying co-activity patterns in vivo.
 
 
 ## Contributing
 
-Pull requests are welcome. Please open an issue if you would like to help contribute to this project or find errors.
+Pull requests are welcome. Please open an issue if you would like to help contribute to this project or if you find errors.
 
 ## License
 
